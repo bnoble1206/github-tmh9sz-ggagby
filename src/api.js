@@ -87,9 +87,9 @@ export default class Api extends React.Component {
         //iterate through transactions again and assign nfts
         for (var hash of Object.keys(txs)){
             if(txs[hash][1]<0){
-                continue;
+                continue; //Don't assign nfts for an unstake
             }
-            console.log(remainingNfts);
+            
             var from = txs[hash][0];
             var sNum = Math.abs(txs[hash][1]);
             var remainingStaked = 0;
@@ -156,10 +156,11 @@ export default class Api extends React.Component {
                 wallets[from][hash][5] = 0;
             }
         }
+        //convert dictionary to string for display
         var outputString = "Wallet\tStake\tHash\tvalue\tnfts\tassigned\n";
         for (var hash of Object.keys(txs)){
             if(txs[hash][1]<0){
-                continue;
+                continue; //Don't display unstakes
             }
             outputString += txs[hash][0].slice(0,6);
             outputString += "\t";
