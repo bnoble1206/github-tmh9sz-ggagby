@@ -106,8 +106,7 @@ export default class Api extends React.Component {
                     remainingStaked += w[h][4];
                 }
             }
-            var netStaked = remainingStaked - totalUnstaked;
-            
+            var netStaked = remainingStaked + totalUnstaked;
             //if net positive (less unstakes than stakes)
             if(netStaked >= 0){
                 //and if there are sufficient remaning nfts
