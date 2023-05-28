@@ -51,6 +51,7 @@ export default class Api extends React.Component {
             var from = data[i].from;
             var v = 0;
             var nfts = 0;
+            
             //if transaction didnt fail, calculate potential nfts
             if(h in txVals){ 
                 v = Number(txVals[h])/1e18;
@@ -95,6 +96,7 @@ export default class Api extends React.Component {
             var remainingStaked = 0;
             var totalUnstaked = 0;
             var w = wallets[from];
+            
             //for each stake, check to see if remaining stakes are net positive
             for(var h of Object.keys(w)){
                 if(w[h][4]<0){
@@ -105,6 +107,7 @@ export default class Api extends React.Component {
                 }
             }
             var netStaked = remainingStaked - totalUnstaked;
+            
             //if net positive (less unstakes than stakes)
             if(netStaked >= 0){
                 //and if there are sufficient remaning nfts
@@ -115,7 +118,7 @@ export default class Api extends React.Component {
                     remainingNfts -= txs[hash][4];
                 }
                 //else if there arent enough remaining nfts
-                else if (remainingNfts - txs[hash][4] >= 0) {
+                else if (remainingNfts > 0) {
                     //claim the remainin nfts
                     txs[hash][5] = remainingNfts;
                     wallets[from][hash][5] = remainingNfts;
