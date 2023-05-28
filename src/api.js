@@ -141,7 +141,7 @@ export default class Api extends React.Component {
                     remainingNfts -= owedNfts;
                 }
                 //else if there arent enough remaining nfts
-                else if (remainingNfts - owedNfts >= 0) {
+                else if (remainingNfts > 0) {
                     //claim the remainin nfts
                     txs[hash][5] = remainingNfts;
                     wallets[from][hash][5] = remainingNfts;
