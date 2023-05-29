@@ -15,12 +15,13 @@ export default class Api extends React.Component {
         const tokenTxUrl = 'module=account&action=tokentx';
         const ffAddress = '0x2152aa45e02c1022cAB4ad964663fB3D69C2023e'; 
         const busdAddr = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56';
-        const ffStartBlock = 	"&startblock=23556338";
+        const ffStartBlock = "&startblock=23556338";
+        const ffEndBlock = "&endblock=26041500";
         const apiContractTx = bscsanBaseUrl + contractTxUrl + "&address=" + ffAddress
-         + ffStartBlock + "&endblock=99999999&page=1&offset=5000&sort=asc" + API_KEY_URL;
+         + ffStartBlock + ffEndBlock + "&page=1&offset=5000&sort=asc" + API_KEY_URL;
         const apiTokenTx = bscsanBaseUrl + tokenTxUrl + "&contractaddress=" + busdAddr
          + "&address=" + ffAddress
-         + ffStartBlock + "&endblock=99999999&page=1&offset=10000&sort=asc" + API_KEY_URL;
+         + ffStartBlock + ffEndBlock + "&page=1&offset=10000&sort=asc" + API_KEY_URL;
          
         var results = await fetch(apiContractTx);
         var result = await results.json();
@@ -158,6 +159,7 @@ export default class Api extends React.Component {
                 wallets[from][hash][5] = 0;
             }
         }
+        console.log(remainingNfts);
         //convert dictionary to string for display
         var outputString = "Wallet\tStake\tHash\tvalue\tnfts\tassigned\n";
         for (var hash of Object.keys(txs)){
