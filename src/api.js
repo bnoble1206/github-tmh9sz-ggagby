@@ -161,7 +161,7 @@ export default class Api extends React.Component {
         }
         console.log(remainingNfts);
         //convert dictionary to string for display
-        var outputString = "Wallet\tStake\tHash\tvalue\tnfts\tassigned\n";
+        var outputString = "Wallet\tStake\tDate\tvalue\tnfts\tassigned\n";
         for (var hash of Object.keys(txs)){
             if(txs[hash][1]<0){
                 continue; //Don't display unstakes
@@ -178,7 +178,11 @@ export default class Api extends React.Component {
                     }
                 }
                 else if(i==2){
-                    outputString += hash.slice(0,10);
+                    var s1 = txs[hash][i];
+                    var n1 = parseInt(s1)*1000;
+                    var d1 = new Date(n1);
+                    
+                    outputString += d1.toDateString().slice(4);
                     outputString += "\t";
                 }
                 else{
